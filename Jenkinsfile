@@ -3,7 +3,7 @@ def mvnHome
 node('node'){
    stage('git checkout'){
       try {
-      git credentialsId: 'git-token', url: 'https://github.com/rbngtm1/CI_CD_Integration'
+      git credentialsId: 'git-token', url: 'https://github.com/DevOps-CodingDojo/CICD'
       } catch(err) {
          sh "echo error in checkout"
       }
@@ -41,8 +41,8 @@ node('node'){
    stage ('docker build and push'){
       try {
        sh "docker version"
-       sh "docker build -t rbngtm1/archiveartifacts:newtag -f Dockerfile ."
-       sh "docker run -p 8080:8080 -d rbngtm1/archiveartifacts:newtag"
+       sh "docker build -t codingdojo/archiveartifacts:newtag -f Dockerfile ."
+       sh "docker run -p 8080:8080 -d codingdojo/archiveartifacts:newtag"
        withDockerRegistry(credentialsId: 'docker-hub-registry') {
        sh "docker push rbngtm1/archiveartifacts:newtag"
         }
